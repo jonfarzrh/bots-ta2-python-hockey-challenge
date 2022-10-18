@@ -1,4 +1,5 @@
 import argparse
+import csv
 
 from src.ranking import Ranking
 
@@ -23,9 +24,13 @@ def entrypoint() -> None:
     input_file = args.input_file
     output_file = args.output_file
 
-    # TODO: Add your code here
-    # (you may modify the line below)
-    my_ranking = Ranking()
+    #read the file as stream
+    with open(input_file) as f:
+        #load all data for ranking processing 
+        file_data = [item for item in csv.DictReader(f)]
+
+    my_ranking = Ranking(data=file_data)
+    my_ranking.generate_ranking()
 
 
 if __name__ == "__main__":
