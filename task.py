@@ -25,12 +25,18 @@ def entrypoint() -> None:
     output_file = args.output_file
 
     #read the file as stream
-    with open(input_file) as f:
+    with open(input_file) as read_file:
         #load all data for ranking processing 
-        file_data = [item for item in csv.DictReader(f)]
+        file_data = [item for item in csv.DictReader(read_file)]
 
-    my_ranking = Ranking(data=file_data)
-    my_ranking.generate_ranking()
+    ranking_worker = Ranking(data=file_data)
+    ranking = ranking_worker.generate_ranking()
+
+    with open(output_file, 'w+',  newline='') as written_file:
+        field_names = ['Place','Team','Score']
+        writer = csv.DictWriter(written_file, fieldnames=field_names)
+        writer.writeheader()
+        writer.writerows(ranking)
 
 
 if __name__ == "__main__":

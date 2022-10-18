@@ -26,16 +26,17 @@ class Ranking:
         place = 1
         result = []
         for i, (k,v) in enumerate(sorted_struct.items()):
+            score_string = f'{v} pt' if v == 1 else f'{v} pts'
             if len(result)>0:
                 if result[i-1]['Score'] == v:
-                    result.append({'Place':result[i-1]['Place'], 'Team':k, 'Score':v})
+                    result.append({'Place':result[i-1]['Place'], 'Team':k, 'Score':score_string})
                     place +=1
                     continue
             if len(result) == 0:
-                result.append({'Place': place, 'Team': k, 'Score': v})
+                result.append({'Place': place, 'Team': k, 'Score': score_string})
                 place += 1
             else:
-                result.append({'Place': place, 'Team': k, 'Score': v})
+                result.append({'Place': place, 'Team': k, 'Score': score_string})
                 place +=1
         return result
 
