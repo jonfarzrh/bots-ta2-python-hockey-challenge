@@ -11,7 +11,7 @@ class Ranking:
     def __init__(self, data: List[Dict[str,int]]) -> None:
         self.data = deepcopy(data)
 
-    def generate_ranking(self)-> List[Dict[int,str,str]]:
+    def generate_ranking(self)-> List[Dict[int,str]]:
         """
         Generates the ranking based on the input of data into this class sorts the data and outputs it
         into the correct format for writing
@@ -22,7 +22,7 @@ class Ranking:
         result = self._convert_ranking_struct_to_writable_csv(sorted_struct)
         return result
 
-    def _convert_ranking_struct_to_writable_csv(self, sorted_struct:Dict) -> List[Dict[int,str,str]]:
+    def _convert_ranking_struct_to_writable_csv(self, sorted_struct:Dict[str,str]) -> List[Dict[int,str]]:
         """
         args: sorted_struct This struct is what will be used to write to a csv 
         returns
